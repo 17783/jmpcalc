@@ -1,4 +1,5 @@
 package com.example.jmp.calc;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class Main {
     public static final String OPERATOR_DELIMITERS = "[a-z\\d\\s]+";
 
     public static void main(String[] args) throws IOException {
-	// write your code here
+        // write your code here
 
         System.out.println("type in your operation:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -18,6 +19,15 @@ public class Main {
 
         String[] elements = name.split(ELEMENT_DELIMITERS);
         String[] operators = name.split(OPERATOR_DELIMITERS);
+        if (name.matches("[IVXivx+\\-*\\/ ]+")) {
+            boolean roman = true;
+            System.out.println("is roman");
+
+        } else {
+            boolean roman = false;
+            System.out.println("is NOT roman");
+        }
+
 //        System.out.println(name);
         int element0 = Integer.parseInt(elements[0]);
         int element1 = Integer.parseInt(elements[1]);
@@ -25,27 +35,29 @@ public class Main {
         System.out.println(element0);
         System.out.println("operator is:" + operator);
         System.out.println(element1);
-        switch (operator) {
-            case "/":
-                if (element1 == 0) {
-                    System.out.println("DIVISION BY ZERO");
+        if (true) {
+            switch (operator) {
+                case "/":
+                    if (element1 == 0) {
+                        System.out.println("DIVISION BY ZERO");
+                        break;
+                    } else {
+                        System.out.println(element0 / element1);
+                    }
                     break;
-                } else {
-                    System.out.println(element0 / element1);
-                }
-                break;
-            case "*":
-                System.out.println(element0 * element1);
-                break;
-            case "-":
-                System.out.println(element0 - element1);
-                break;
-            case "+":
-                System.out.println(element0 + element1);
-                break;
-            default:
-                System.out.println("Error: operation does not exist");
-                break;
+                case "*":
+                    System.out.println(element0 * element1);
+                    break;
+                case "-":
+                    System.out.println(element0 - element1);
+                    break;
+                case "+":
+                    System.out.println(element0 + element1);
+                    break;
+                default:
+                    System.out.println("Error: operation does not exist");
+                    break;
+            }
         }
 
 
