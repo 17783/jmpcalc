@@ -19,45 +19,50 @@ public class Main {
 
         String[] elements = name.split(ELEMENT_DELIMITERS);
         String[] operators = name.split(OPERATOR_DELIMITERS);
+        boolean roman;
         if (name.matches("[IVXivx+\\-*\\/ ]+")) {
-            boolean roman = true;
-            System.out.println("is roman");
+           roman = true;
+//            System.out.println("is roman");
 
         } else {
-            boolean roman = false;
-            System.out.println("is NOT roman");
+            roman = false;
+//            System.out.println("is NOT roman");
         }
 
 //        System.out.println(name);
-        int element0 = Integer.parseInt(elements[0]);
-        int element1 = Integer.parseInt(elements[1]);
+        String element0 = elements[0];
+        String element1 = elements[1];
         String operator = operators[1];
-        System.out.println(element0);
-        System.out.println("operator is:" + operator);
-        System.out.println(element1);
-        if (true) {
-            switch (operator) {
-                case "/":
-                    if (element1 == 0) {
-                        System.out.println("DIVISION BY ZERO");
-                        break;
-                    } else {
-                        System.out.println(element0 / element1);
-                    }
-                    break;
-                case "*":
-                    System.out.println(element0 * element1);
-                    break;
-                case "-":
-                    System.out.println(element0 - element1);
-                    break;
-                case "+":
-                    System.out.println(element0 + element1);
-                    break;
-                default:
-                    System.out.println("Error: operation does not exist");
-                    break;
-            }
+//        System.out.println(element0);
+//        System.out.println("operator is:" + operator);
+//        System.out.println(element1);
+        if (!roman) {
+            int element0Int = Integer.parseInt(element0);
+            int element1Int = Integer.parseInt(element1);
+            int result = Computer.compute(element0Int, element1Int, operator);
+            System.out.println(name + " = " + result);
+//            switch (operator) {
+//                case "/":
+//                    if (element1Int == 0) {
+//                        System.out.println("DIVISION BY ZERO");
+//                        break;
+//                    } else {
+//                        System.out.println(element0Int / element1Int);
+//                    }
+//                    break;
+//                case "*":
+//                    System.out.println(element0Int * element1Int);
+//                    break;
+//                case "-":
+//                    System.out.println(element0Int - element1Int);
+//                    break;
+//                case "+":
+//                    System.out.println(element0Int + element1Int);
+//                    break;
+//                default:
+//                    System.out.println("Error: operation does not exist");
+//                    break;
+//            }
         }
 
 
