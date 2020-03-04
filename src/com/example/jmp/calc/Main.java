@@ -20,12 +20,13 @@ public class Main {
 
         String[] elements = name.split(ELEMENT_DELIMITERS);
         String[] operators = name.split(OPERATOR_DELIMITERS);
+        String operator = name.split(OPERATOR_DELIMITERS)[1];
         boolean roman;
         roman = name.matches(ROMAN_CHECK);
         System.out.println("using roman numerals: " + roman);
         String element0 = elements[0];
         String element1 = elements[1];
-        String operator = operators[1];
+//        String operator = operators[1];
         int element0Int;
         int element1Int;
         int result = 0;
