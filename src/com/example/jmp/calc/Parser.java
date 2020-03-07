@@ -3,15 +3,19 @@ package com.example.jmp.calc;
 import java.util.Arrays;
 
 public class Parser {
-    private static int[] arabic = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    private static String[] roman = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
+    public static final int[] ARABIC = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    public static final String[] ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
 
-    public static int getArabic(String element) {
+        public static int getArabic(String element) {
         element = element.toLowerCase();
-        int index = Arrays.binarySearch(roman, element);
-        index = (index < 0) ? -1 : index;
+        int index = Arrays.binarySearch(ROMAN, element);
+//        index = (index < 0) ? -1 : index;
+        if (index < 0) {
+            System.out.println("value of \"" + element + "\" is out of bounds, only roman values from I to X are accepted");
+            System.exit(1);
+        }
         int result = 0;
-        result = arabic[index];
+        result = ARABIC[index];
         return result;
     }
 
