@@ -37,7 +37,7 @@ public class Computer {
             element1Int = Integer.parseInt(element1);
             try {
                 result = Computer.compute(element0Int, element1Int, operator);
-            } catch (ArithmeticException ex) {
+            } catch (ArithmeticException | BadFormatException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
@@ -48,7 +48,7 @@ public class Computer {
             element1Int = Parser.getArabic(element1);
             try {
                 result = Computer.compute(element0Int, element1Int, operator);
-            } catch (ArithmeticException ex) {
+            } catch (ArithmeticException | BadFormatException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
