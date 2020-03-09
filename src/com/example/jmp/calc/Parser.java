@@ -5,8 +5,39 @@ import java.util.Arrays;
 public class Parser {
     public static final int[] ARABIC = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     public static final String[] ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
+    public static final String ELEMENT_DELIMITERS = "[+\\-*/ ]+";
+    public static final String OPERATOR_DELIMITERS = "[IVXivx\\d\\s]+";
+    public static final String ROMAN_CHECK = "[IVXivx+\\-*\\/ ]+";
 
-        public static int getArabic(String element) {
+    public static String[] getElements(String input)
+    {
+        return input.split(ELEMENT_DELIMITERS);
+    }
+
+    public static String getOperator(String input){
+        return input.split(OPERATOR_DELIMITERS)[1];
+    }
+
+    public static boolean isRoman(String input) {
+        return input.matches(ROMAN_CHECK);
+    }
+
+    public static boolean checkInputValidity(String input) {
+        return input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+");
+    }
+
+    public static void checkElementSize(String element0, String element1) {
+//        if (Parser.getArabic(element0))
+        if (Integer.parseInt(element0) < 0 || Integer.parseInt(element0) > 10) {
+            System.out.println("first value is too big, only 0..10 values are accepted");
+            System.exit(1);
+        } else if (Integer.parseInt(element1) < 0 || Integer.parseInt(element1) > 10) {
+            System.out.println("second value is too big, only 0..10 values are accepted");
+            System.exit(1);
+        }
+    }
+
+    public static int getArabic(String element) {
         element = element.toLowerCase();
         int index = Arrays.binarySearch(ROMAN, element);
 //        index = (index < 0) ? -1 : index;
