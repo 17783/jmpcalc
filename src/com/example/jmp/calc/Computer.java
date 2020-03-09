@@ -1,14 +1,13 @@
 package com.example.jmp.calc;
 
 public class Computer {
-    public static int compute(int x, int y, String operator) {
+    public static int compute(int x, int y, String operator) throws BadFormatException {
         int result = 0;
         switch (operator) {
             case "/":
                 if (y == 0) {
-                    System.out.println("DIVISION BY ZERO");
-                    result = 0;
-                    break;
+//                    System.out.println("DIVISION BY ZERO");
+                    throw new ArithmeticException("DIVISION BY ZERO");
                 } else {
                     result = x / y;
                 }
@@ -23,9 +22,7 @@ public class Computer {
                 result = x + y;
                 break;
             default:
-                System.out.println("Error: operation does not exist");
-                result = 0;
-                break;
+                throw new BadFormatException("operation " + operator + " not allowed");
         }
         return result;
     }
@@ -38,13 +35,23 @@ public class Computer {
         if (!roman) {
             element0Int = Integer.parseInt(element0);
             element1Int = Integer.parseInt(element1);
-            result = Computer.compute(element0Int, element1Int, operator);
+            try {
+                result = Computer.compute(element0Int, element1Int, operator);
+            } catch (ArithmeticException ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
             finalResult = Integer.toString(result);
 
         } else {
             element0Int = Parser.getArabic(element0);
             element1Int = Parser.getArabic(element1);
-            result = Computer.compute(element0Int, element1Int, operator);
+            try {
+                result = Computer.compute(element0Int, element1Int, operator);
+            } catch (ArithmeticException ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
             finalResult = Parser.getRoman(result);
         }
 
