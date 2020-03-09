@@ -40,7 +40,8 @@ public class Main {
             }
         }
 
-        Computer.getResult(element0, element1, operator, roman);
+        String finalResult = Computer.getResult(element0, element1, operator, roman);
+        System.out.println(element0.toUpperCase() + " " + operator + " " + element1.toUpperCase() + " = " + finalResult);
 
     }
 }

@@ -17,14 +17,24 @@ public class Parser {
         return input.split(OPERATOR_DELIMITERS)[1];
     }
 
+    //check if using roman numerals
     public static boolean isRoman(String input) {
         return input.matches(ROMAN_CHECK);
     }
 
     public static void checkInputValidity(String input) throws BadFormatException {
+        // global format check
+        /*
+            Калькулятор умеет выполнять операции сложения, вычитания, умножения и деления с двумя числами: a + b, a - b, a * b, a / b. Данные передаются в одну строку (смотрите пример)! Решения, в которых каждое число и арифмитеческая операция передаются с новой строки считаются неверными.
+            Калькулятор умеет работать как с арабскими (1,2,3,4,5…), так и с римскими (I,II,III,IV,V…) числа.
+            Калькулятор умеет работать только с целыми числами.
+         */
         if (!input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+")) {
             throw new BadFormatException("bad format, only integers from 1 to 10, roman numerals from I to X and '+','-','/','*' operators are allowed");
         }
+        /*
+        Калькулятор умеет работать только с арабскими или римскими цифрами одновременно, при вводе пользователем строки вроде 3 + II калькулятор должен выбросить исключение и прекратить свою работу.
+         */
         boolean romanMatch = input.matches("[IVXivx\\s]+[+\\-*\\/][IVXivx\\s]+");
         boolean arabicMatch = input.matches("[\\d\\s]+[+\\-*\\/][\\d\\s]+");
         if (!(romanMatch || arabicMatch)) {
@@ -33,6 +43,9 @@ public class Parser {
 
     }
 
+    /*
+        Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более. На выходе числа не ограничиваются по величине и могут быть любыми.a
+     */
     public static void checkElementSize(String element0, String element1) throws BadFormatException {
         if (Integer.parseInt(element0) < 1 || Integer.parseInt(element0) > 10) {
             throw new BadFormatException("value " + element0 + " is of bounds, only 1..10 values are allowed");

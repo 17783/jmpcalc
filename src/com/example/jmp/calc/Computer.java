@@ -6,7 +6,6 @@ public class Computer {
         switch (operator) {
             case "/":
                 if (y == 0) {
-//                    System.out.println("DIVISION BY ZERO");
                     throw new ArithmeticException("DIVISION BY ZERO");
                 } else {
                     result = x / y;
@@ -55,7 +54,6 @@ public class Computer {
             finalResult = Parser.getRoman(result);
         }
 
-        System.out.println(element0.toUpperCase() + " " + operator + " " + element1.toUpperCase() + " = " + finalResult);
         return finalResult;
     }
 }
