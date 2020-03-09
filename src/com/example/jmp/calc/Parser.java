@@ -30,7 +30,7 @@ public class Parser {
         boolean romanMatch = input.matches("[IVXivx\\s]+[+\\-*\\/][IVXivx\\s]+");
         boolean arabicMatch = input.matches("[\\d\\s]+[+\\-*\\/][\\d\\s]+");
 //        return (globalMatch && romanMatch) || (globalMatch && arabicMatch);
-        if (romanMatch || arabicMatch) {
+        if (!romanMatch || !arabicMatch) {
             throw new BadFormatException("mixed roman and arabic input is NOT allowed");
         }
 
