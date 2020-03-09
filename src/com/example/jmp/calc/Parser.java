@@ -9,12 +9,11 @@ public class Parser {
     public static final String OPERATOR_DELIMITERS = "[IVXivx\\d\\s]+";
     public static final String ROMAN_CHECK = "[IVXivx+\\-*\\/ ]+";
 
-    public static String[] getElements(String input)
-    {
+    public static String[] getElements(String input) {
         return input.split(ELEMENT_DELIMITERS);
     }
 
-    public static String getOperator(String input){
+    public static String getOperator(String input) {
         return input.split(OPERATOR_DELIMITERS)[1];
     }
 
@@ -23,7 +22,11 @@ public class Parser {
     }
 
     public static boolean checkInputValidity(String input) {
-        return input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+");
+        boolean globalMatch = input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+");
+        boolean romanMatch = input.matches("[IVXivx\\s]+[+\\-*\\/][IVXivx\\s]+");
+        boolean arabicMatch = input.matches("[\\d\\s]+[+\\-*\\/][\\d\\s]+");
+        return (globalMatch && romanMatch) || (globalMatch && arabicMatch);
+
     }
 
     public static void checkElementSize(String element0, String element1) {
