@@ -14,8 +14,7 @@ public class Main {
         String consoleInput = reader.readLine();
         try {
             Parser.checkInputValidity(consoleInput);
-        } catch (BadFormatException ex)
-        {
+        } catch (BadFormatException ex) {
             System.out.println(ex.getMessage());
             System.exit(1);
         }
@@ -28,22 +27,20 @@ public class Main {
         if (roman) {
             try {
                 Parser.checkElementSize(Integer.toString(Parser.getArabic(element0)), Integer.toString(Parser.getArabic(element0)));
-            } catch (BadFormatException ex)
-            {
+            } catch (BadFormatException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
         } else {
             try {
                 Parser.checkElementSize(element0, element1);
-            } catch (BadFormatException ex)
-            {
+            } catch (BadFormatException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
         }
 
-    Computer.getResult(element0, element1, operator, roman);
+        Computer.getResult(element0, element1, operator, roman);
 
     }
 }
