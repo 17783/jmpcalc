@@ -21,32 +21,39 @@ public class Parser {
         return input.matches(ROMAN_CHECK);
     }
 
-    public static boolean checkInputValidity(String input) {
+    //    public static boolean checkInputValidity(String input) {
+    public static void checkInputValidity(String input) throws BadFormatException {
         boolean globalMatch = input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+");
+        if (!input.matches("[IVXivx\\d\\s]+[+\\-*\\/][IVXivx\\d\\s]+")) {
+            throw new BadFormatException("bad format, only integers from 1 to 10, roman numerals from I to X and '+','-','/','*' operators are accepted");
+        }
         boolean romanMatch = input.matches("[IVXivx\\s]+[+\\-*\\/][IVXivx\\s]+");
         boolean arabicMatch = input.matches("[\\d\\s]+[+\\-*\\/][\\d\\s]+");
-        return (globalMatch && romanMatch) || (globalMatch && arabicMatch);
+//        return (globalMatch && romanMatch) || (globalMatch && arabicMatch);
+        if (romanMatch || arabicMatch) {
+            throw new BadFormatException("mixed roman and arabic input is NOT allowed");
+        }
 
     }
 
-    public static void checkElementSize(String element0, String element1) {
+    public static void checkElementSize(String element0, String element1) throws BadFormatException {
 //        if (Parser.getArabic(element0))
-        if (Integer.parseInt(element0) < 0 || Integer.parseInt(element0) > 10) {
-            System.out.println("first value is too big, only 0..10 values are accepted");
-            System.exit(1);
-        } else if (Integer.parseInt(element1) < 0 || Integer.parseInt(element1) > 10) {
-            System.out.println("second value is too big, only 0..10 values are accepted");
-            System.exit(1);
+        if (Integer.parseInt(element0) < 1 || Integer.parseInt(element0) > 10) {
+//            System.out.println("value "+ element0 +" is too big, only 1..10 values are accepted");
+            throw new BadFormatException("value " + element0 + " is of bounds, only 1..10 values are accepted");
+        } else if (Integer.parseInt(element1) < 1 || Integer.parseInt(element1) > 10) {
+//            System.out.println("value "+ element0 +" is too big, only 1..10 values are accepted");
+            throw new BadFormatException("value " + element1 + " is of bounds, only 1..10 values are accepted");
         }
     }
 
-    public static int getArabic(String element) {
+    public static int getArabic(String element) throws BadFormatException {
         element = element.toLowerCase();
         int index = Arrays.binarySearch(ROMAN, element);
 //        index = (index < 0) ? -1 : index;
         if (index < 0) {
-            System.out.println("value of \"" + element + "\" is out of bounds, only roman values from I to X are accepted");
-            System.exit(1);
+            throw new BadFormatException("value of \"" + element + "\" is out of bounds, only roman values from I to X are accepted");
+//            System.exit(1);
         }
         int result = 0;
         result = ARABIC[index];

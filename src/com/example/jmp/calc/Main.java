@@ -7,14 +7,19 @@ import java.io.InputStreamReader;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, BadFormatException {
 
         System.out.println("type in your operation:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String name = reader.readLine();
-        if (!Parser.checkInputValidity(name)) {
-            System.out.println("bad format");
+        try {
+            Parser.checkInputValidity(name);
+//            System.out.println("bad format, only integers from 1 to 10, roman numerals from I to X and '+','-','/','*' operators are accepted, roman and arabic numbers CANNOT be used at the same time");
+        } catch (BadFormatException ex)
+        {
+            System.out.println(ex.getMessage());
             System.exit(1);
+
         }
 
         boolean roman = Parser.isRoman(name);
@@ -23,12 +28,24 @@ public class Main {
         String element1 = Parser.getElements(name)[1];
         String operator = Parser.getOperator(name);
         if (roman) {
-            Parser.checkElementSize(Integer.toString(Parser.getArabic(element0)), Integer.toString(Parser.getArabic(element0)));
+            try {
+                Parser.checkElementSize(Integer.toString(Parser.getArabic(element0)), Integer.toString(Parser.getArabic(element0)));
+            } catch (BadFormatException ex)
+            {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+
+            }
         } else {
-            Parser.checkElementSize(element0, element1);
+            try {
+                Parser.checkElementSize(element0, element1);
+            } catch (BadFormatException ex)
+            {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
         }
-//        Parser.checkElementSize(element0, element1);
-//        String operator = operators[1];
+
         int element0Int;
         int element1Int;
         int result = 0;
@@ -47,7 +64,6 @@ public class Main {
         }
 
         System.out.println(element0.toUpperCase() + " " + operator + " " + element1.toUpperCase() + " = " + finalResult);
-
 
     }
 }
