@@ -11,22 +11,20 @@ public class Main {
 
         System.out.println("type in your operation:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String name = reader.readLine();
+        String consoleInput = reader.readLine();
         try {
-            Parser.checkInputValidity(name);
-//            System.out.println("bad format, only integers from 1 to 10, roman numerals from I to X and '+','-','/','*' operators are accepted, roman and arabic numbers CANNOT be used at the same time");
+            Parser.checkInputValidity(consoleInput);
         } catch (BadFormatException ex)
         {
             System.out.println(ex.getMessage());
             System.exit(1);
-
         }
 
-        boolean roman = Parser.isRoman(name);
+        boolean roman = Parser.isRoman(consoleInput);
         System.out.println("using roman numerals: " + roman);
-        String element0 = Parser.getElements(name)[0];
-        String element1 = Parser.getElements(name)[1];
-        String operator = Parser.getOperator(name);
+        String element0 = Parser.getElements(consoleInput)[0];
+        String element1 = Parser.getElements(consoleInput)[1];
+        String operator = Parser.getOperator(consoleInput);
         if (roman) {
             try {
                 Parser.checkElementSize(Integer.toString(Parser.getArabic(element0)), Integer.toString(Parser.getArabic(element0)));
@@ -34,7 +32,6 @@ public class Main {
             {
                 System.out.println(ex.getMessage());
                 System.exit(1);
-
             }
         } else {
             try {
